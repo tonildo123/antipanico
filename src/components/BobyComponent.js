@@ -1,11 +1,11 @@
 import { Text, TouchableOpacity, View } from 'react-native'
-import React, {useEffect} from 'react'
+import React, { useEffect } from 'react'
 import { IconButton, MD3Colors } from 'react-native-paper';
 import HeaderComponent from './HeaderComponent';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { UseSelector, useDispatch, useSelector } from 'react-redux';
 
-const BobyComponent = ({navigation}) => {
+const BobyComponent = ({ navigation }) => {
 
     const state = useSelector(state => state)
     const distpach = useDispatch()
@@ -14,20 +14,24 @@ const BobyComponent = ({navigation}) => {
         console.log('View clickeado');
     };
 
+    const traerDNI = async () => {
+        const dni_stored = await AsyncStorage.getItem('DNI-STORAGE');
+        console.log('DNI storaged', dni_stored)
+    }
+
     useEffect(() => {
-      
-    console.log('DNI storaged', AsyncStorage.getItem('DNI_STORAGE'))
-    console.log('state', JSON.stringify(state, null, 6))
-      
-    }, [])
-    
-    
+        traerDNI()
+        console.log('state', JSON.stringify(state, null, 6))
+
+    }, [state])
+
+
 
     return (
-        <View style={{ flex: 1}}>
-            <HeaderComponent navigation={navigation}/>
+        <View style={{ flex: 1 }}>
+            <HeaderComponent navigation={navigation} />
             <TouchableOpacity
-            style={{flex:1, justifyContent:'center', alignItems:'center'}}                
+                style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}
                 onPress={handleClick}>
                 <IconButton
                     icon="bell-ring"

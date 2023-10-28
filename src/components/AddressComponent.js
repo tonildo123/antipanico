@@ -1,18 +1,21 @@
 import React, { useState, useEffect } from 'react';
-import { ScrollView, StyleSheet, View } from 'react-native';
+import { ScrollView, StyleSheet, View,Alert } from 'react-native';
 import { TextInput, Button, Card, MD3Colors, Text, List } from 'react-native-paper';
 import HeaderComponent from './HeaderComponent';
 import json from '../utils/ciudades-argentinas.json'
-import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
+import MapView, { PROVIDER_GOOGLE, Marker } from 'react-native-maps';
 import { enableLatestRenderer } from 'react-native-maps';
 import useGeolocalizacion from '../hooks/useGeolocalizacion';
 import useFotos from '../hooks/useFotos';
+import { setAddressInfo } from '../state/AddressSlice';
+import { useSelector, useDispatch } from 'react-redux';
 
 enableLatestRenderer();
 
 
 const AddressComponent = ({ navigation }) => {
-
+  const state = useSelector(state => state)
+  const distpach = useDispatch()
   const { obtenerUbicacion, latitud, longitud } = useGeolocalizacion();
   const { nombreImagen, foto, handleFoto, handleImagen } = useFotos()
   const tucumanData = json.find(item => item.nombre === "Tucuman");
@@ -33,7 +36,17 @@ const AddressComponent = ({ navigation }) => {
   };
 
   const guardarDatos = async () => {
-    console.log('calle:', calle);
+
+    const user = {
+      calle: calle,
+      altura: altura,
+      foto: foto,
+      localidad: selectedLocalidad,
+      latitud: latitud,
+      longitud:longitud
+    }
+    distpach(setAddressInfo(user))
+    Alert.alert('Cargado correctamente!')
   };
 
 
@@ -110,7 +123,16 @@ const AddressComponent = ({ navigation }) => {
             latitudeDelta: 0.019046017524171788,
             longitudeDelta: 0.012100450694561005,
           }}
+        >
+          <Marker
+          coordinate={{
+            latitude: latitud,
+            longitude: longitud,
+          }}
+          title="Usted esta aqui"
+          description="Sera la ubicacion cargada en el sistema"
         />
+        </MapView>  
       }
 
       <Button style={{ backgroundColor: MD3Colors.error50, marginVertical: 12 }} onPress={guardarDatos}>

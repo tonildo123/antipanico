@@ -5,7 +5,6 @@ import HeaderComponent from './HeaderComponent';
 import { useSelector, useDispatch } from 'react-redux';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { setUserInfo, setClearUserInfo } from '../state/ProfileSlice';
-import firestore from '@react-native-firebase/firestore';
 import useFotos from '../hooks/useFotos';
 
 const ProfileComponent = ({ navigation }) => {
@@ -20,26 +19,11 @@ const ProfileComponent = ({ navigation }) => {
   const [visible, setVisible] = useState(false);
 
 
-  const guardarDatos = async () => {
+  const guardarDatos = async () => {   
+
     
-
-    if (state.user.dni !== null) {
-      await AsyncStorage.setItem('DNI_STORAGE', dni);
-    }
-
-    // try {
-    //   const imageURL = await uploadImage(foto, 'GuardiaUrbanaFolder', nombreImagen);
-    //   firestore().collection('UsersGuardiaUrbana').add({
-    //     nombre: nombre,
-    //     apellido: apellido,
-    //     foto: imageURL,
-    //     telefono: telefono,
-    //     dni: dni,
-    //   })
-    // } catch (error) {
-    //   console.log(error)
-    //   Alert.alert('ocurrio un error')
-    // } finally {
+    try {
+      await AsyncStorage.setItem('DNI-STORAGE', dni);
       const user = {
         nombre: nombre,
         apellido: apellido,
@@ -49,7 +33,10 @@ const ProfileComponent = ({ navigation }) => {
       }
       distpach(setUserInfo(user))
       Alert.alert('Cargado correctamente!')
-    // }
+    } catch (e) {
+      console.log(e)
+    }
+      
   };
 
  
