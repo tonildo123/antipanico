@@ -29,9 +29,18 @@ const AddressSlice = createSlice({
       state.latitud = latitud;
       state.longitud = longitud;
     },
+    setClearAddressInfo: (state, action) => {
+      
+      state.foto = null;
+      state.calle = '';
+      state.altura = '';
+      state.localidad = '';
+      state.latitud = null;
+      state.longitud = null;
+    },
   },
 });
 
-export const { setAddressInfo } = AddressSlice.actions;
+export const { setAddressInfo,setClearAddressInfo } = AddressSlice.actions;
 
 export default AddressSlice.reducer;

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "139395984733",
+    "project_id": "antipanico-411a3",
+    "storage_bucket": "antipanico-411a3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:139395984733:android:54df9c14480a40dae70cb4",
+        "android_client_info": {
+          "package_name": "com.antipanico"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCoag0VngiLrxVLMIigJEQjQ8zOvS5HTIs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

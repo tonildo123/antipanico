@@ -7,15 +7,15 @@ import MapView, { PROVIDER_GOOGLE, Marker } from 'react-native-maps';
 import { enableLatestRenderer } from 'react-native-maps';
 import useGeolocalizacion from '../hooks/useGeolocalizacion';
 import useFotos from '../hooks/useFotos';
-import { setAddressInfo } from '../state/AddressSlice';
-import { useSelector, useDispatch } from 'react-redux';
+import { setAddressInfo, setClearAddressInfo } from '../state/AddressSlice';
+import { useDispatch } from 'react-redux';
 
 enableLatestRenderer();
 
 
 const AddressComponent = ({ navigation }) => {
-  const state = useSelector(state => state)
   const distpach = useDispatch()
+  const {uploadImageToStorage} = useFirebase()
   const { obtenerUbicacion, latitud, longitud } = useGeolocalizacion();
   const { nombreImagen, foto, handleFoto, handleImagen } = useFotos()
   const tucumanData = json.find(item => item.nombre === "Tucuman");
@@ -35,19 +35,66 @@ const AddressComponent = ({ navigation }) => {
     setLocalidadesVisible(false);
   };
 
-  const guardarDatos = async () => {
+  const guardarDatos = async () => {   
 
-    const user = {
-      calle: calle,
-      altura: altura,
-      foto: foto,
-      localidad: selectedLocalidad,
-      latitud: latitud,
-      longitud:longitud
-    }
-    distpach(setAddressInfo(user))
-    Alert.alert('Cargado correctamente!')
-  };
+    
+      try {
+        await AsyncStorage.setItem('DNI-STORAGE', dni);
+        const url = await uploadImageToStorage(foto, nombreImagen)
+        firestore().collection('address').add({
+          calle: calle,
+          altura: altura,
+          foto: url,
+          localidad: selectedLocalidad,
+          latitud: latitud,
+          longitud:longitud
+        })
+        const address = {
+          calle: calle,
+          altura: altura,
+          foto: url,
+          localidad: selectedLocalidad,
+          latitud: latitud,
+          longitud:longitud
+        }
+        distpach(setAddressInfo(address))
+        Alert.alert('Cargado correctamente!')
+      } catch (e) {
+        console.log(e)
+        Alert.alert('ocurrio un error')
+      }
+        
+    };
+  
+    const handleUpdate =async (values) =>{
+  
+      try {
+        const url = await uploadImageToStorage(foto, nombreImagen)
+        firestore().collection('address').doc(id).update({
+          calle: calle,
+          altura: altura,
+          foto: url,
+          localidad: selectedLocalidad,
+          latitud: latitud,
+          longitud:longitud
+        })
+        distpach(setClearAddressInfo())
+        const profile = {
+          calle: calle,
+          altura: altura,
+          foto: url,
+          localidad: selectedLocalidad,
+          latitud: latitud,
+          longitud:longitud
+        }
+        distpach(setAddressInfo(profile))
+        Alert.alert('Actualizado correctamente!')
+      } catch (error) {
+        console.log(error)
+        Alert.alert('Error al actualizar!')
+      }
+    
+    } 
 
 
 

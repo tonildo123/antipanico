@@ -6,11 +6,14 @@ import { useSelector, useDispatch } from 'react-redux';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { setUserInfo, setClearUserInfo } from '../state/ProfileSlice';
 import useFotos from '../hooks/useFotos';
+import firestore from '@react-native-firebase/firestore';
+import useFirebase from '../hooks/useFirebase';
 
 const ProfileComponent = ({ navigation }) => {
 
   const state = useSelector(state => state)
-  const distpach = useDispatch()
+  const distpach = useDispatch();
+  const {uploadImageToStorage} = useFirebase()
   const { foto,nombreImagen, handleFoto, handleImagen } = useFotos()
   const [nombre, setNombre] = useState(state.user.nombre);
   const [apellido, setApellido] = useState(state.user.apellido);
@@ -24,10 +27,18 @@ const ProfileComponent = ({ navigation }) => {
     
     try {
       await AsyncStorage.setItem('DNI-STORAGE', dni);
+      const url = await uploadImageToStorage(foto, nombreImagen)
+      firestore().collection('ProfileUsers').add({
+        nombre: nombre,
+        apellido: apellido,
+        foto: url,
+        telefono: telefono,
+        dni: dni,
+      })
       const user = {
         nombre: nombre,
         apellido: apellido,
-        foto: foto,
+        foto: url,
         telefono: telefono,
         dni: dni,
       }
@@ -35,13 +46,38 @@ const ProfileComponent = ({ navigation }) => {
       Alert.alert('Cargado correctamente!')
     } catch (e) {
       console.log(e)
+      Alert.alert('ocurrio un error')
     }
       
   };
 
- 
+  const handleUpdate =async (values) =>{
 
+    try {
+      firestore().collection('ProfileUsers').doc(id).update({
+        nombre: nombre,
+        apellido: apellido,
+        foto: foto,
+        telefono: telefono,
+        dni: dni,
+      })
+      distpach(setClearUserInfo())
+      const profile = {
+        nombre: nombre,
+        apellido: apellido,
+        foto: foto,
+        telefono: telefono,
+        dni: dni,
+      }
+      distpach(setUserInfo(profile))
+      Alert.alert('Actualizado correctamente!')
+    } catch (error) {
+      console.log(error)
+      Alert.alert('Error al actualizar!')
+    }
   
+  }
+
 
   return (
     <ScrollView>

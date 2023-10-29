@@ -84,8 +84,11 @@ To learn more about React Native, take a look at the following resources:
 https://redux-toolkit.js.org/introduction/getting-started
 # NAVIGATION
 https://reactnavigation.org/docs/stack-navigator
-# FIREBASE
 
+# FIREBASE
+## confirguracion 
+https://www.youtube.com/watch?v=wSaNByDtth4&list=PLTUdithMKgOvPGYxpm6c4cxZ0rBg13PfJ&index=5
+y ademas https://rnfirebase.io/
 # RN paper
  yarn add react-native-paper
  yarn add react-native-safe-area-context
