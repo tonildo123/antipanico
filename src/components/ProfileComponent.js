@@ -11,14 +11,14 @@ import useFirebase from '../hooks/useFirebase';
 
 const ProfileComponent = ({ navigation }) => {
 
-  const state = useSelector(state => state)
+  const state = useSelector(state => state.user)
   const distpach = useDispatch();
   const {uploadImageToStorage} = useFirebase()
   const { foto,nombreImagen, handleFoto, handleImagen } = useFotos()
-  const [nombre, setNombre] = useState(state.user.nombre);
-  const [apellido, setApellido] = useState(state.user.apellido);
-  const [dni, setDni] = useState(state.user.dni);
-  const [telefono, setTelefono] = useState(state.user.telefono);
+  const [nombre, setNombre] = useState(state.nombre);
+  const [apellido, setApellido] = useState(state.apellido);
+  const [dni, setDni] = useState(state.dni);
+  const [telefono, setTelefono] = useState(state.telefono);
   const [visible, setVisible] = useState(false);
 
 
@@ -54,7 +54,7 @@ const ProfileComponent = ({ navigation }) => {
   const handleUpdate =async (values) =>{
 
     try {
-      firestore().collection('ProfileUsers').doc(id).update({
+      firestore().collection('ProfileUsers').doc(state.id).update({
         nombre: nombre,
         apellido: apellido,
         foto: foto,
@@ -83,7 +83,7 @@ const ProfileComponent = ({ navigation }) => {
     <ScrollView>
       <HeaderComponent navigation={navigation} />
       <Card>
-        <Card.Cover source={{ uri: foto }} style={styles.image} />
+        <Card.Cover source={{ uri: state.foto ?? foto }} style={styles.image} />
       </Card>
       {!visible && <Button
         icon="camera"

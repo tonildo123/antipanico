@@ -1,20 +1,30 @@
 import { Text, TouchableOpacity, View } from 'react-native'
-import React from 'react'
+import React, {useEffect} from 'react'
 import { IconButton, MD3Colors } from 'react-native-paper';
 import HeaderComponent from './HeaderComponent';
-// import AsyncStorage from '@react-native-async-storage/async-storage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import useFirebase from '../hooks/useFirebase';
 
 const BobyComponent = ({ navigation }) => {
 
-
+    const {getFirebaseProfile, getFirebaseAddress,} =useFirebase()
     const handleClick = () => {
         console.log('View clickeado');
     };
 
-    // const traerDNI = async () => {
-    //     const dni_stored = await AsyncStorage.getItem('DNI-STORAGE');
-    //     console.log('DNI storaged', dni_stored)
-    // }
+    const traerDNI = async () => {
+        const dni_stored = await AsyncStorage.getItem('DNI-STORAGE');
+        if(dni_stored !== null && dni_stored !== undefined && dni_stored !== '' ){
+
+            getFirebaseProfile(dni_stored);
+            getFirebaseAddress(dni_stored)
+        }
+    }
+
+    useEffect(() => {
+        traerDNI();
+    }, [])
+    
 
     
     return (

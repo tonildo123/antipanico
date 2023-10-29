@@ -2,6 +2,7 @@ import  {useState} from 'react'
 import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
 
 const useFotos = () => {
+  
     const [foto, setFoto] = useState('https://via.placeholder.com/150x150');
     const [nombreImagen, setNombreImagen] = useState();
 

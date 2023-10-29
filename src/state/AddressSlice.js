@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
+  id:null, 
   foto: null,
   calle: '',
   altura: '',
@@ -15,6 +16,7 @@ const AddressSlice = createSlice({
   reducers: {
     setAddressInfo: (state, action) => {
       const {
+        id,
         foto,
         calle,
         altura,
@@ -22,6 +24,7 @@ const AddressSlice = createSlice({
         latitud,
         longitud,
       } = action.payload;
+      state.id = id;
       state.foto = foto;
       state.calle = calle;
       state.altura = altura;
@@ -30,7 +33,7 @@ const AddressSlice = createSlice({
       state.longitud = longitud;
     },
     setClearAddressInfo: (state, action) => {
-      
+      state.id = null;
       state.foto = null;
       state.calle = '';
       state.altura = '';

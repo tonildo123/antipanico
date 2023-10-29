@@ -9,6 +9,7 @@ import useGeolocalizacion from '../hooks/useGeolocalizacion';
 import useFotos from '../hooks/useFotos';
 import { setAddressInfo, setClearAddressInfo } from '../state/AddressSlice';
 import { useDispatch } from 'react-redux';
+import useFirebase from '../hooks/useFirebase';
 
 enableLatestRenderer();
 
@@ -39,9 +40,10 @@ const AddressComponent = ({ navigation }) => {
 
     
       try {
-        await AsyncStorage.setItem('DNI-STORAGE', dni);
+        const dni = await AsyncStorage.getItem('DNI-STORAGE');
         const url = await uploadImageToStorage(foto, nombreImagen)
         firestore().collection('address').add({
+          dni: dni,
           calle: calle,
           altura: altura,
           foto: url,
@@ -71,6 +73,7 @@ const AddressComponent = ({ navigation }) => {
       try {
         const url = await uploadImageToStorage(foto, nombreImagen)
         firestore().collection('address').doc(id).update({
+          dni:dni,
           calle: calle,
           altura: altura,
           foto: url,
