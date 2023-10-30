@@ -8,6 +8,7 @@ const initialState = {
   localidad: '',
   latitud: null,
   longitud: null,
+  completed:false
 };
 
 const AddressSlice = createSlice({
@@ -31,6 +32,7 @@ const AddressSlice = createSlice({
       state.localidad = localidad;
       state.latitud = latitud;
       state.longitud = longitud;
+      state.completed=true
     },
     setClearAddressInfo: (state, action) => {
       state.id = null;
@@ -40,6 +42,7 @@ const AddressSlice = createSlice({
       state.localidad = '';
       state.latitud = null;
       state.longitud = null;
+      state.completed=false
     },
   },
 });

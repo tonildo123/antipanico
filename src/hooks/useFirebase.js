@@ -36,7 +36,7 @@ const useFirebase = () => {
             key: documentSnapshot.id
           });
         });
-        // console.log('objeto : ', objeto)
+        console.log('objeto users: ', objeto)
 
         if (objeto.length > 0) {
           const profile = {
@@ -72,7 +72,7 @@ const useFirebase = () => {
             key: documentSnapshot.id
           });
         });
-        // console.log('objeto : ', objeto)
+        console.log('objeto address : ', objeto)
 
         if (objeto.length > 0) {
 

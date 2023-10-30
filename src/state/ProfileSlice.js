@@ -8,6 +8,7 @@ const initialState = {
   dni: null,
   telefono: '',
   foto: null,
+  completed:false
 };
 
 const ProfileSlice = createSlice({
@@ -22,6 +23,7 @@ const ProfileSlice = createSlice({
       state.dni = dni;
       state.telefono = telefono;
       state.foto = foto;
+      state.completed=true;
     },
     setClearUserInfo: (state, action) => {
       state.id = null;
@@ -30,10 +32,11 @@ const ProfileSlice = createSlice({
       state.dni = null;
       state.telefono = '',
       state.foto = null;
+      state.completed=false
     },
   },
 });
 
-export const { setUserInfo } = ProfileSlice.actions;
+export const { setUserInfo, setClearUserInfo } = ProfileSlice.actions;
 
 export default ProfileSlice.reducer;

@@ -108,5 +108,7 @@ cd android
 
 https://github.com/tonildo123/CrudFirebaseRN/blob/master/src/components/screens/RegisterScreenSelfie.js
 
+### publicar en la play store
+
 
 
