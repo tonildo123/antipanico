@@ -89,6 +89,10 @@ https://reactnavigation.org/docs/stack-navigator
 ## confirguracion 
 https://www.youtube.com/watch?v=wSaNByDtth4&list=PLTUdithMKgOvPGYxpm6c4cxZ0rBg13PfJ&index=5
 y ademas https://rnfirebase.io/
+## realtimedatabase 
+https://www.youtube.com/watch?v=q1bxyyKh3Dc
+y ademas https://rnfirebase.io/
+
 # RN paper
  yarn add react-native-paper
  yarn add react-native-safe-area-context
