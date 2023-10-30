@@ -16,7 +16,7 @@ const useGeolocalizacion = () => {
       (error) => {
         console.error(error);
       },
-      { enableHighAccuracy: true, timeout: 15000, maximumAge: 10000 }
+      { enableHighAccuracy: true, timeout: 30000, maximumAge: 10000 }
     );
   };
 

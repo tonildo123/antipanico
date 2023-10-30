@@ -68,10 +68,11 @@ const ProfileComponent = ({ navigation }) => {
       setLoading(true)
 
       try {
+        const url = nombreImagen ? await uploadImageToStorage(foto, nombreImagen) : state.foto
         firestore().collection('ProfileUsers').doc(state.id).update({
           nombre: nombre,
           apellido: apellido,
-          foto: foto,
+          foto: url,
           telefono: telefono,
           dni: dni,
         })
@@ -80,7 +81,7 @@ const ProfileComponent = ({ navigation }) => {
           id:state.id,
           nombre: nombre,
           apellido: apellido,
-          foto: foto,
+          foto: url,
           telefono: telefono,
           dni: dni,
         }

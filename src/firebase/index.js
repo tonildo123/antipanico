@@ -1,5 +1,6 @@
-import * as firebase from "firebase";
-import 'firebase/storage';
+import {initializeApp} from "firebase/app";
+import {getDatabase} from '@react-native-firebase/database'
+
 
 const firebaseConfig = {
   apiKey: "AIzaSyABDggLbGI1cpYJruXzDPLDDZuLLQWgjVw",
@@ -11,25 +12,5 @@ const firebaseConfig = {
 };
 
 
-firebase.initializeApp(firebaseConfig);
-firebase.firestore();
-
-const storage = firebase.storage(); // Inicializa el módulo de Firebase Storage
-
-export const uploadImageToStorage = async (imageUri, imageName) => {
-  try {
-    const reference = storage.ref(`images/${imageName}`);
-    await reference.putFile(imageUri);
-
-    // Obtener la URL de la imagen cargada
-    const url = await reference.getDownloadURL();
-    console.log(url)
-    return url;
-  } catch (error) {
-    console.error('Error al subir la imagen a Firebase Storage:', error);
-    throw error;
-  }
-};
-
-
-export default firebase;
+const app = initializeApp(firebaseConfig);
+export const db = getDatabase(app)

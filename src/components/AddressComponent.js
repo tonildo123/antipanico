@@ -88,7 +88,7 @@ const AddressComponent = ({ navigation }) => {
     setLoading(true)
     try {
 
-      const url = await uploadImageToStorage(foto, nombreImagen)
+      const url = nombreImagen ? await uploadImageToStorage(foto, nombreImagen) : pick
       firestore().collection('address').doc(id).update({
         dni: dni,
         calle: calle,
