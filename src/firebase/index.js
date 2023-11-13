@@ -3,7 +3,7 @@ import {getDatabase} from '@react-native-firebase/database'
 
 
 const firebaseConfig = {
-  apiKey: "AIzaSyABDggLbGI1cpYJruXzDPLDDZuLLQWgjVw",
+  apiKey: "AIzaSyCoag0VngiLrxVLMIigJEQjQ8zOvS5HTIs",
   authDomain: "antipanico-411a3.firebaseapp.com",
   projectId: "antipanico-411a3",
   storageBucket: "antipanico-411a3.appspot.com",

@@ -4,6 +4,7 @@ import ProfileComponent from './ProfileComponent';
 import { NavigationContainer } from '@react-navigation/native';
 import { MD3Colors } from 'react-native-paper';
 import AddressComponent from './AddressComponent';
+import WebViewComponent from './WebViewComponent';
 
 const Stack = createStackNavigator();
 
@@ -35,6 +36,18 @@ function InitComponent() {
           headerTitleAlign: 'center',
         }}/>
         <Stack.Screen name="Address" component={AddressComponent} options={{
+          title: 'GUARDIA URBANA',
+          headerStyle: {
+            backgroundColor: MD3Colors.error50,
+          },
+          headerTintColor: '#fff',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+
+          },
+          headerTitleAlign: 'center',
+        }}/>
+        <Stack.Screen name="Web" component={WebViewComponent} options={{
           title: 'GUARDIA URBANA',
           headerStyle: {
             backgroundColor: MD3Colors.error50,

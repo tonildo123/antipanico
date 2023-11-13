@@ -44,6 +44,10 @@ const HeaderComponent = ({ navigation }) => {
         onPress={() => {requestGeolocalizacionPermission()}}
         icon={() => <Icon name="home" size={24} color={MD3Colors.error50} />}
       ><Text style={styles.text}>DOMICILIO</Text></Button>
+      <Button
+        onPress={() => {navigation.navigate('Web')}}
+        icon={() => <Icon name="bank-outline" size={24} color={MD3Colors.error50} />}
+      ><Text style={styles.text}>SP</Text></Button>
     </Appbar.Header>
   )
 }

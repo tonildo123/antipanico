@@ -124,7 +124,7 @@ const AddressComponent = ({ navigation }) => {
     <ScrollView>
       <HeaderComponent navigation={navigation} />
       <Card>
-        <Card.Cover source={{ uri:pick ?? foto }} style={styles.image} resizeMode='contain' />
+        <Card.Cover source={{ uri:pick ?? foto }} style={styles.image} resizeMode='cover' />
       </Card>
       {!visible && <Button
         icon="camera"

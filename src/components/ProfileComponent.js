@@ -100,8 +100,8 @@ const ProfileComponent = ({ navigation }) => {
     return (
       <ScrollView>
         <HeaderComponent navigation={navigation} />
-        <Card>
-          <Card.Cover source={{ uri: state.foto ?? foto }} style={styles.image} resizeMode='contain' />
+        <Card style={{ width: '100%', alignItems: 'center' }}>
+          <Card.Cover source={{ uri: state.foto ?? foto }} style={styles.image} resizeMode='cover' />
         </Card>
         {!visible && <Button
           icon="camera"
@@ -163,6 +163,8 @@ const ProfileComponent = ({ navigation }) => {
   const styles = StyleSheet.create({
     image: {
       height: 200,
+      width: 150, // Adjust the width as needed
+      borderRadius: 75, // Half of the width to make it an oval
     },
   });
 
