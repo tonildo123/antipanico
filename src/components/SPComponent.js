@@ -4,12 +4,16 @@ import { Button, MD3Colors, Text } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const SPComponent = () => {
+    const callEmergencyNumber = (number) => {
+        Linking.openURL(`tel:${number}`);
+      };
+
     return (
         <View style={styles.container}>
             <Text variant="displaySmall">Numeros utiles</Text>
             <Button
                 mode="contained"
-                onPress={() => console.log('Pressed')}
+                onPress={() => callEmergencyNumber('911')}
                 style={styles.button}
                 icon={() => <Icon name="police-badge" size={68} color={MD3Colors.primary99} style={styles.icon} />}
             >
@@ -17,7 +21,7 @@ const SPComponent = () => {
             </Button>
             <Button
                 mode="contained"
-                onPress={() => console.log('Pressed')}
+                onPress={() => callEmergencyNumber('100')}
                 style={styles.button}
                 icon={() => <Icon name="fire-truck" size={68} color={MD3Colors.primary99} style={styles.icon} />}
             >
@@ -25,7 +29,7 @@ const SPComponent = () => {
             </Button>
             <Button
                 mode="contained"
-                onPress={() => console.log('Pressed')}
+                onPress={() => callEmergencyNumber('107')}
                 style={styles.button}
                 icon={() => <Icon name="ambulance" size={68} color={MD3Colors.primary99} style={styles.icon} />}
             >
